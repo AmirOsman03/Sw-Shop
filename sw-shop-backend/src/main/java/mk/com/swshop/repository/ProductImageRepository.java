@@ -9,4 +9,8 @@ import java.util.List;
 @Repository
 public interface ProductImageRepository extends JpaRepository<ProductImage, Long> {
     List<ProductImage> findByProductId(Long productId);
+
+    // Земи сите слики за даден продукт
+    List<ProductImage> findAllByProductId(Long productId);
+
 }

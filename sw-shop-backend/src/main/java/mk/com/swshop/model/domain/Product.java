@@ -44,6 +44,7 @@ public class Product {
     @CollectionTable(name = "product_quantity", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "size")
     @Column(name = "quantity")
+    @Enumerated(EnumType.STRING)
     private Map<Size, Integer> quantityBySize;
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
