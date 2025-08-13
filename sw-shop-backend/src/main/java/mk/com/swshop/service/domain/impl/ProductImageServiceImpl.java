@@ -51,4 +51,5 @@ public class ProductImageServiceImpl implements ProductImageService {
         if (images.isEmpty()) return null;
         return images.get(0); // прва слика како главна
     }
+
 }

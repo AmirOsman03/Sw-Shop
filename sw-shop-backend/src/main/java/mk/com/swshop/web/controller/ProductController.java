@@ -23,6 +23,13 @@ public class ProductController {
         return ResponseEntity.ok(productApplicationService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DisplayProductDto> getProductDetails(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(productApplicationService.findById(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<DisplayProductDto> createProduct(
             @RequestBody CreateProductDto createProductDto

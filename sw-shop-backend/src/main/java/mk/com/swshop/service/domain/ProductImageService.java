@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface ProductImageService {
 
-
     ProductImage addProductImage(Long productId, String imageUrl);
 
     List<ProductImage> getAllProductImages(Long productId);
