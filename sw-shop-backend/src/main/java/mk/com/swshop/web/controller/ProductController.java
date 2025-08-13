@@ -2,7 +2,7 @@ package mk.com.swshop.web.controller;
 
 import mk.com.swshop.dto.create.CreateProductDto;
 import mk.com.swshop.dto.display.DisplayProductDto;
-import mk.com.swshop.model.domain.Product;
+import mk.com.swshop.service.application.ProductApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +23,13 @@ public class ProductController {
         return ResponseEntity.ok(productApplicationService.findAll());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<DisplayProductDto> getProductDetails(
+            @PathVariable Long id
+    ) {
+        return ResponseEntity.ok(productApplicationService.findById(id));
+    }
+
     @PostMapping("/create")
     public ResponseEntity<DisplayProductDto> createProduct(
             @RequestBody CreateProductDto createProductDto
@@ -35,7 +42,9 @@ public class ProductController {
             @PathVariable Long id,
             @RequestBody CreateProductDto createProductDto
     ) {
-        return ResponseEntity.ok(productApplicationService.edit(id, createProductDto));
+        return productApplicationService.edit(id, createProductDto)
+                .map(ResponseEntity::ok)
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/delete/{id}")

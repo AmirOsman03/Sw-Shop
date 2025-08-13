@@ -4,6 +4,7 @@ import mk.com.swshop.dto.create.CreateUserDto;
 import mk.com.swshop.dto.display.DisplayUserDto;
 import mk.com.swshop.dto.login.LoginRequestDto;
 import mk.com.swshop.dto.login.LoginResponseDto;
+import mk.com.swshop.service.application.UserApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
