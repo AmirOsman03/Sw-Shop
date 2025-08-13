@@ -14,7 +14,8 @@ public record DisplayProductDto(
         List<Size> sizes,
         Color color,
         String category,
-        Map<Size, Integer> quantityBySize
+        Map<Size, Integer> quantityBySize,
+        List<String> images
 ) {
     public static DisplayProductDto from(Product product) {
         return new DisplayProductDto(
@@ -24,7 +25,8 @@ public record DisplayProductDto(
                 product.getSizes(),
                 product.getColor(),
                 product.getCategory().name(),
-                product.getQuantityBySize()
+                product.getQuantityBySize(),
+                product.getImages()
         );
     }
 

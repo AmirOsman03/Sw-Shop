@@ -16,7 +16,6 @@ import java.util.Map;
 @Table(name = "products")
 public class Product {
 
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -47,12 +46,22 @@ public class Product {
     @Enumerated(EnumType.STRING)
     private Map<Size, Integer> quantityBySize;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductImage> images;
+    // list of image URLs
+    @ElementCollection
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url")
+    private List<String> images;
 
-
-    public Product(String name, String description, Integer price,
-                   List<Size> sizes, Color color, Category category, Map<Size, Integer> quantityBySize) {
+    public Product(
+            String name,
+            String description,
+            Integer price,
+            List<Size> sizes,
+            Color color,
+            Category category,
+            Map<Size, Integer> quantityBySize,
+            List<String> images
+    ) {
         this.name = name;
         this.description = description;
         this.price = price;
@@ -60,7 +69,7 @@ public class Product {
         this.color = color;
         this.category = category;
         this.quantityBySize = quantityBySize;
+        this.images = images;
     }
-
 
 }
