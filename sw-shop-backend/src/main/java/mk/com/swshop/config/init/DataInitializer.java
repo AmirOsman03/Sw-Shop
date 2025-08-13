@@ -57,7 +57,8 @@ public class DataInitializer {
                             List.of(Size.S, Size.M, Size.L),
                             Color.BEIGE,
                             Category.BRAS,
-                            Map.of(Size.S, 10, Size.M, 8, Size.L, 5)
+                            Map.of(Size.S, 10, Size.M, 8, Size.L, 5),
+                            List.of("/")
                     ),
                     new Product(
                             "Cotton Panties Set",
@@ -66,7 +67,8 @@ public class DataInitializer {
                             List.of(Size.S, Size.M, Size.L),
                             Color.WHITE,
                             Category.PANTIES,
-                            Map.of(Size.S, 20, Size.M, 15, Size.L, 12)
+                            Map.of(Size.S, 20, Size.M, 15, Size.L, 12),
+                            List.of("/")
                     ),
                     new Product(
                             "Silk Lingerie Nightgown",
@@ -75,7 +77,8 @@ public class DataInitializer {
                             List.of(Size.S, Size.M, Size.L),
                             Color.RED,
                             Category.LINGERIE,
-                            Map.of(Size.S, 5, Size.M, 3, Size.L, 2)
+                            Map.of(Size.S, 5, Size.M, 3, Size.L, 2),
+                            List.of("/")
                     ),
                     new Product(
                             "Thermal Knit Pajamas",
@@ -84,7 +87,8 @@ public class DataInitializer {
                             List.of(Size.M, Size.L, Size.XL),
                             Color.BLUE,
                             Category.PAJAMAS,
-                            Map.of(Size.M, 7, Size.L, 4, Size.XL, 3)
+                            Map.of(Size.M, 7, Size.L, 4, Size.XL, 3),
+                            List.of("/")
                     ),
                     new Product(
                             "Seamless Sports Bra",
@@ -93,7 +97,8 @@ public class DataInitializer {
                             List.of(Size.S, Size.M, Size.L),
                             Color.BLACK,
                             Category.BRAS,
-                            Map.of(Size.S, 12, Size.M, 9, Size.L, 6)
+                            Map.of(Size.S, 12, Size.M, 9, Size.L, 6),
+                            List.of("/")
                     )
             );
 

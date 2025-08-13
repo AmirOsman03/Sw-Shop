@@ -43,7 +43,14 @@ public class Product {
     @CollectionTable(name = "product_quantity", joinColumns = @JoinColumn(name = "product_id"))
     @MapKeyColumn(name = "size")
     @Column(name = "quantity")
+    @Enumerated(EnumType.STRING)
     private Map<Size, Integer> quantityBySize;
+
+    // list of image URLs
+    @ElementCollection
+    @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
+    @Column(name = "image_url")
+    private List<String> images;
 
     public Product(
             String name,
@@ -52,7 +59,8 @@ public class Product {
             List<Size> sizes,
             Color color,
             Category category,
-            Map<Size, Integer> quantityBySize
+            Map<Size, Integer> quantityBySize,
+            List<String> images
     ) {
         this.name = name;
         this.description = description;
@@ -61,6 +69,7 @@ public class Product {
         this.color = color;
         this.category = category;
         this.quantityBySize = quantityBySize;
+        this.images = images;
     }
 
 }
