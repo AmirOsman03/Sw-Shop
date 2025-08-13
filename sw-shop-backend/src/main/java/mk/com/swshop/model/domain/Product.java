@@ -3,6 +3,10 @@ package mk.com.swshop.model.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mk.com.swshop.model.enums.Color;
+import mk.com.swshop.model.enums.Size;
+
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -16,10 +20,12 @@ public class Product {
     private String name;
     private String description;
     private Integer price;
-    private String size;
-    private String color;
+    @Enumerated(EnumType.STRING)
+    private Size size;
+    @Enumerated(EnumType.STRING)
+    private Color color;
     private String image;
-    @ManyToOne
-    private User user;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<ProductImage> images;
 }
