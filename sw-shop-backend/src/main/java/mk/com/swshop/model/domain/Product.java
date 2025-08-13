@@ -23,6 +23,6 @@ public class Product {
     @ManyToOne
     private User user;
     @Enumerated(value = EnumType.STRING)
-    private Category category
+    private Category category;
 
 }
