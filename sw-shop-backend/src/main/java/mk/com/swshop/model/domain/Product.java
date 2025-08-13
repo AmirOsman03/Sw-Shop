@@ -3,6 +3,7 @@ package mk.com.swshop.model.domain;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import mk.com.swshop.model.enums.Category;
 
 @Data
 @NoArgsConstructor
@@ -21,5 +22,7 @@ public class Product {
     private String image;
     @ManyToOne
     private User user;
+    @Enumerated(value = EnumType.STRING)
+    private Category category
 
 }
