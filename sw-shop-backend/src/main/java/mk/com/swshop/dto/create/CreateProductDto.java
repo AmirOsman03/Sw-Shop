@@ -5,24 +5,27 @@ import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.model.enums.Color;
 import mk.com.swshop.model.enums.Size;
 
+import java.util.List;
+import java.util.Map;
+
 public record CreateProductDto(
         String name,
         String description,
         Integer price,
-        Size size,
+        List<Size> sizes,
         Color color,
         Category category,
-        Integer quantity
+        Map<Size, Integer> quantityBySize
 ) {
     public Product toProduct() {
         return new Product(
                 name,
                 description,
                 price,
-                size,
+                sizes,
                 color,
                 category,
-                quantity
+                quantityBySize
         );
     }
 }

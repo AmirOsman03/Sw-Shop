@@ -5,25 +5,26 @@ import mk.com.swshop.model.enums.Color;
 import mk.com.swshop.model.enums.Size;
 
 import java.util.List;
+import java.util.Map;
 
 public record DisplayProductDto(
         String name,
         String description,
         Integer price,
-        Size size,
+        List<Size> sizes,
         Color color,
         String category,
-        Integer quantity
+        Map<Size, Integer> quantityBySize
 ) {
     public static DisplayProductDto from(Product product) {
         return new DisplayProductDto(
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
-                product.getSize(),
+                product.getSizes(),
                 product.getColor(),
                 product.getCategory().name(),
-                product.getQuantity()
+                product.getQuantityBySize()
         );
     }
 
