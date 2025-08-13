@@ -1,9 +1,9 @@
-package mk.com.swshop.service.impl;
+package mk.com.swshop.service.domain.impl;
 
 import lombok.AllArgsConstructor;
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.repository.ProductRepository;
-import mk.com.swshop.service.ProductService;
+import mk.com.swshop.service.domain.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;

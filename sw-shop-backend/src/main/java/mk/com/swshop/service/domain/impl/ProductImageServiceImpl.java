@@ -1,10 +1,10 @@
-package mk.com.swshop.service.impl;
+package mk.com.swshop.service.domain.impl;
 
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.domain.ProductImage;
 import mk.com.swshop.repository.ProductImageRepository;
 import mk.com.swshop.repository.ProductRepository;
-import mk.com.swshop.service.ProductImageService;
+import mk.com.swshop.service.domain.ProductImageService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

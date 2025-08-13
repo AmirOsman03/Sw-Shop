@@ -1,11 +1,11 @@
-package mk.com.swshop.service.impl;
+package mk.com.swshop.service.domain.impl;
 
 
 
 import mk.com.swshop.model.domain.User;
 import mk.com.swshop.model.enums.Role;
 import mk.com.swshop.repository.UserRepository;
-import mk.com.swshop.service.UserService;
+import mk.com.swshop.service.domain.UserService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

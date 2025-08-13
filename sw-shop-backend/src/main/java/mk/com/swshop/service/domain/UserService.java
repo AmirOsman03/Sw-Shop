@@ -1,4 +1,4 @@
-package mk.com.swshop.service;
+package mk.com.swshop.service.domain;
 
 import mk.com.swshop.model.domain.User;
 import mk.com.swshop.model.enums.Role;
