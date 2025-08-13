@@ -52,6 +52,7 @@ public class Product {
     @Column(name = "image_url")
     private List<String> images;
 
+
     public Product(
             String name,
             String description,

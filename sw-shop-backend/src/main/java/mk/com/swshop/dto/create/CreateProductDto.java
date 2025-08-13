@@ -16,7 +16,8 @@ public record CreateProductDto(
         Color color,
         Category category,
         Map<Size, Integer> quantityBySize,
-        List<String> images
+        List<String> images,
+        Integer quantity
 ) {
     public Product toProduct() {
         return new Product(
