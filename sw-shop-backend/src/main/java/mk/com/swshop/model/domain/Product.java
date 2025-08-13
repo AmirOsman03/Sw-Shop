@@ -39,4 +39,14 @@ public class Product {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductImage> images;
 
+    // TODO: add product images
+    public Product(String name, String description, Integer price, Size size, Color color, Category category, Integer quantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.size = size;
+        this.color = color;
+        this.category = category;
+        this.quantity = quantity;
+    }
 }
