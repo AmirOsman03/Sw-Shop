@@ -36,12 +36,12 @@ public class JwtSecurityWebConfig {
                 .cors(corsCustomizer ->
                         corsCustomizer.configurationSource(corsConfigurationSource())
                 )
-                .authorizeHttpRequests(authorizeHttpRequestsCustomizer ->
-                        authorizeHttpRequestsCustomizer
-                                .anyRequest().permitAll()
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/", "/login**", "/oauth2/**").permitAll()
+                        .anyRequest().authenticated()
                 )
-                .sessionManagement(sessionManagementConfigurer ->
-                        sessionManagementConfigurer.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .oauth2Login(oauth2 -> oauth2
+                        .defaultSuccessUrl("/swagger-ui/index.html", true) // каде да оди после login
                 );
         return http.build();
     }
