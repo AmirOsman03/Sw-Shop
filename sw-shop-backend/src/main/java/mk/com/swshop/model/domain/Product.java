@@ -45,9 +45,6 @@ public class Product {
     @Column(name = "quantity")
     private Map<Size, Integer> quantityBySize;
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductImage> images;
-
     public Product(
             String name,
             String description,
