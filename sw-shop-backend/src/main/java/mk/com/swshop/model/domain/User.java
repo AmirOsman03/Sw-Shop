@@ -9,6 +9,7 @@ import mk.com.swshop.model.enums.Role;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
+
 public class User {
 
     @Id
@@ -20,4 +21,10 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
+    public User(String username, String password, Role role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }
