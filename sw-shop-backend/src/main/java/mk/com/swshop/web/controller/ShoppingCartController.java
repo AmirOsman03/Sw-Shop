@@ -45,5 +45,18 @@ public class ShoppingCartController {
         return ResponseEntity.ok(shoppingCartService.addProduct(email, name, productId));
     }
 
+    @PostMapping("/remove-product/{productId}")
+    public ResponseEntity<DisplayShoppingCartDto> removeProduct(
+            @PathVariable Long productId,
+            @AuthenticationPrincipal OAuth2User principal) {
+
+        if (principal == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        String name = principal.getAttribute("name");
+        String email = principal.getAttribute("email");
+
+        return ResponseEntity.ok(shoppingCartService.removeProduct(email, name, productId));
+    }
+
 }
 

@@ -55,4 +55,13 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         });
     }
 
+    public ShoppingCart removeProduct(String email, String name, Long productId) {
+        ShoppingCart cart = getOrCreateCart(email, name);
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        cart.getProducts().remove(product); // вади само еден
+        return cartRepo.save(cart);
+    }
+
 }
