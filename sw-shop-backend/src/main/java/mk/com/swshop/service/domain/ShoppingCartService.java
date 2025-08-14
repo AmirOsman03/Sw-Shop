@@ -9,4 +9,6 @@ public interface ShoppingCartService {
 
     ShoppingCart addProduct(String email, String name, Long productId);
 
+    ShoppingCart removeProduct(String email, String name, Long productId);
+
 }

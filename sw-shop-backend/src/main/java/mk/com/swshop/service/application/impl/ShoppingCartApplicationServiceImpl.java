@@ -1,7 +1,6 @@
 package mk.com.swshop.service.application.impl;
 
 import mk.com.swshop.dto.display.DisplayShoppingCartDto;
-import mk.com.swshop.model.domain.User;
 import mk.com.swshop.service.application.ShoppingCartApplicationService;
 import mk.com.swshop.service.domain.ShoppingCartService;
 import org.springframework.stereotype.Service;
@@ -24,6 +23,11 @@ public class ShoppingCartApplicationServiceImpl implements ShoppingCartApplicati
     @Override
     public DisplayShoppingCartDto getOrCreateCart(String email, String name) {
         return DisplayShoppingCartDto.from(shoppingCartService.getOrCreateCart(email, name));
+    }
+
+    @Override
+    public DisplayShoppingCartDto removeProduct(String email, String name, Long productId) {
+        return DisplayShoppingCartDto.from(shoppingCartService.removeProduct(email, name, productId));
     }
 
 }
