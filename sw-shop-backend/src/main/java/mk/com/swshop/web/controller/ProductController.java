@@ -2,6 +2,7 @@ package mk.com.swshop.web.controller;
 
 import mk.com.swshop.dto.create.CreateProductDto;
 import mk.com.swshop.dto.display.DisplayProductDto;
+import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.service.application.ProductApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,4 +55,31 @@ public class ProductController {
         return ResponseEntity.ok(productApplicationService.delete(id));
     }
 
+    @GetMapping("/bras")
+    public ResponseEntity<List<DisplayProductDto>> getBras() {
+        return ResponseEntity.ok(productApplicationService.findByCategoryId(Category.BRAS));
+    }
+
+    @GetMapping("/panties")
+    public ResponseEntity<List<DisplayProductDto>> getPanties() {
+        return ResponseEntity.ok(productApplicationService.findByCategoryId(Category.PANTIES));
+    }
+
+    @GetMapping("/lingerie")
+    public ResponseEntity<List<DisplayProductDto>> getLingerie() {
+        return ResponseEntity.ok(productApplicationService.findByCategoryId(Category.LINGERIE));
+    }
+
+    @GetMapping("/knitwear")
+    public ResponseEntity<List<DisplayProductDto>> getKnitwear() {
+        return ResponseEntity.ok(productApplicationService.findByCategoryId(Category.KNITWEAR));
+    }
+
+    @GetMapping("/pajamas")
+    public ResponseEntity<List<DisplayProductDto>> getPajamas() {
+        return ResponseEntity.ok(productApplicationService.findByCategoryId(Category.PAJAMAS));
+
+    }
 }
+
+
