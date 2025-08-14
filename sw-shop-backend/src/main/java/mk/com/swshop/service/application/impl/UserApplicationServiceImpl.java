@@ -18,8 +18,8 @@ public class UserApplicationServiceImpl implements UserApplicationService {
     }
 
     @Override
-    public LoginResponseDto login(LoginRequestDto loginRequestDto) {
-        return null;
+    public DisplayUserDto login(LoginRequestDto loginRequestDto) {
+        return DisplayUserDto.from(userService.login(loginRequestDto.username(), loginRequestDto.username()));
     }
 
     @Override

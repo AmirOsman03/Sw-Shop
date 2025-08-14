@@ -29,7 +29,7 @@ public class DataInitializer {
         this.productRepository = productRepository;
     }
 
-//   @PostConstruct
+    //   @PostConstruct
     public void init() {
         initUsers();
         initProducts();

@@ -7,7 +7,7 @@ import mk.com.swshop.dto.login.LoginResponseDto;
 
 public interface UserApplicationService {
 
-    LoginResponseDto login(LoginRequestDto loginRequestDto);
+    DisplayUserDto login(LoginRequestDto loginRequestDto);
 
     DisplayUserDto register(CreateUserDto createUserDto);
 
