@@ -7,7 +7,6 @@ import mk.com.swshop.dto.login.LoginResponseDto;
 import mk.com.swshop.service.application.UserApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,12 +22,12 @@ public class UserController {
         this.userApplicationService = userApplicationService;
     }
 
-//    @PostMapping("/login")
-//    public ResponseEntity<LoginResponseDto> login(
-//            @RequestBody LoginRequestDto loginRequestDto
-//    ) {
-//        return ResponseEntity.ok(userApplicationService.login(loginRequestDto));
-//    }
+    @PostMapping("/login")
+    public ResponseEntity<DisplayUserDto> login(
+            @RequestBody LoginRequestDto loginRequestDto
+    ) {
+        return ResponseEntity.ok(userApplicationService.login(loginRequestDto));
+    }
 
     @PostMapping("/register")
     public ResponseEntity<DisplayUserDto> register(

@@ -1,6 +1,5 @@
 package mk.com.swshop.config.init;
 
-import jakarta.annotation.PostConstruct;
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.domain.User;
 import mk.com.swshop.model.enums.Category;
@@ -30,7 +29,7 @@ public class DataInitializer {
         this.productRepository = productRepository;
     }
 
-  //@PostConstruct
+    //   @PostConstruct
     public void init() {
         initUsers();
         initProducts();
