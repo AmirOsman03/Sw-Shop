@@ -1,5 +1,6 @@
 package mk.com.swshop.service.domain;
 import mk.com.swshop.model.domain.Product;
+import mk.com.swshop.model.enums.Category;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import java.util.List;
@@ -18,6 +19,8 @@ public interface ProductService {
     Product save(Product product);
 
     void deleteById(Long id);
+
+    List<Product> findByCategory(Category category);
 
 
 }
