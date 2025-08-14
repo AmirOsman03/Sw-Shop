@@ -1,6 +1,7 @@
 package mk.com.swshop.web.controller;
 
 import mk.com.swshop.dto.display.DisplayShoppingCartDto;
+import mk.com.swshop.model.enums.Size;
 import mk.com.swshop.service.application.ShoppingCartApplicationService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,48 @@ public class ShoppingCartController {
 
         return ResponseEntity.ok(shoppingCartService.removeProduct(email, name, productId));
     }
+
+
+    @PostMapping("/add-product/{productId}/size")
+    public ResponseEntity<DisplayShoppingCartDto> addProductWithSize(
+            @PathVariable Long productId,
+            @RequestParam("size") Size size,
+            @RequestParam int qty,
+            @AuthenticationPrincipal OAuth2User principal
+    ) {
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String name = principal.getAttribute("name");
+        String email = principal.getAttribute("email");
+
+        return ResponseEntity.ok(
+                shoppingCartService.addProductWithSize(email, name, productId, String.valueOf(size), qty)
+        );
+    }
+
+
+    @DeleteMapping("/remove-product/{productId}")
+    public ResponseEntity<DisplayShoppingCartDto> removeProductWithSize(
+            @PathVariable Long productId,
+            @RequestParam("size") Size size,
+            @RequestParam("qty") int qty,
+            @AuthenticationPrincipal OAuth2User principal
+    ) {
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+        String name = principal.getAttribute("name");
+        String email = principal.getAttribute("email");
+
+        return ResponseEntity.ok(
+                shoppingCartService.removeProductWithSize(email, name, productId, size, qty)
+        );
+    }
+
+
 
 }
 

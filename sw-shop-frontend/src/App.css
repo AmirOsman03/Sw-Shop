@@ -1,0 +1,121 @@
+/* Custom Slick Slider Styles */
+.slick-slider {
+    height: 100vh;
+}
+
+.slick-slide {
+    height: 100vh;
+}
+
+.slick-slide > div {
+    height: 100vh;
+}
+
+.slick-dots {
+    bottom: 30px;
+}
+
+.slick-dots li button:before {
+    color: white;
+    opacity: 0.5;
+    font-size: 12px;
+}
+
+.slick-dots li.slick-active button:before {
+    color: #ec4899;
+    opacity: 1;
+}
+
+.slick-prev,
+.slick-next {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2) !important;
+    border-radius: 50%;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.slick-prev:hover,
+.slick-next:hover {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+.slick-prev:before,
+.slick-next:before {
+    font-size: 24px;
+    color: white;
+}
+
+.slick-prev {
+    left: 30px;
+}
+
+.slick-next {
+    right: 30px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .slick-prev,
+    .slick-next {
+        display: none !important;
+    }
+    
+    .slick-dots {
+        bottom: 20px;
+    }
+}
+
+/* Navbar Wow Effects */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes glow {
+    0%, 100% { box-shadow: 0 0 5px rgba(236, 72, 153, 0.3); }
+    50% { box-shadow: 0 0 20px rgba(236, 72, 153, 0.6); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.navbar-logo {
+    background: linear-gradient(90deg, #ec4899, #f472b6, #ec4899);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+.navbar-button {
+    position: relative;
+    overflow: hidden;
+}
+
+.navbar-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.navbar-button:hover::before {
+    left: 100%;
+}
+
+.navbar-cart-badge {
+    animation: float 2s ease-in-out infinite;
+}
+
+.navbar-cart-badge:hover {
+    animation: glow 1s ease-in-out infinite;
+}
