@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 public record DisplayProductDto(
+        Long id,
         String name,
         String description,
         Integer price,
@@ -19,6 +20,7 @@ public record DisplayProductDto(
 ) {
     public static DisplayProductDto from(Product product) {
         return new DisplayProductDto(
+                product.getId(),
                 product.getName(),
                 product.getDescription(),
                 product.getPrice(),
