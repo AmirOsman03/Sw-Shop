@@ -2,19 +2,19 @@ import axiosInstance from "../axios/axios.js";
 
 const productRepository = {
     create: async (data) => {
-        return axiosInstance.post("/books/create", data);
+        return axiosInstance.post("/products/create", data);
     },
     getAll: async () => {
-        return axiosInstance.get("/books");
+        return axiosInstance.get("/products");
     },
     update: async (id, data) => {
-        return axiosInstance.put(`/books/edit/${id}`, data);
+        return axiosInstance.put(`/products/edit/${id}`, data);
     },
     delete: async (id) => {
-        return axiosInstance.delete(`/books/delete/${id}`);
+        return axiosInstance.delete(`/products/delete/${id}`);
     },
     getById: async (id) => {
-        return axiosInstance.get(`/books/${id}`);
+        return axiosInstance.get(`/products/${id}`);
     },
 };
 
