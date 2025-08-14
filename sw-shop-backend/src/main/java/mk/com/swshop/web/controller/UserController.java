@@ -8,7 +8,10 @@ import mk.com.swshop.service.application.UserApplicationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
@@ -20,12 +23,12 @@ public class UserController {
         this.userApplicationService = userApplicationService;
     }
 
-    @PostMapping("/login")
-    public ResponseEntity<LoginResponseDto> login(
-            @RequestBody LoginRequestDto loginRequestDto
-    ) {
-        return ResponseEntity.ok(userApplicationService.login(loginRequestDto));
-    }
+//    @PostMapping("/login")
+//    public ResponseEntity<LoginResponseDto> login(
+//            @RequestBody LoginRequestDto loginRequestDto
+//    ) {
+//        return ResponseEntity.ok(userApplicationService.login(loginRequestDto));
+//    }
 
     @PostMapping("/register")
     public ResponseEntity<DisplayUserDto> register(
@@ -35,11 +38,17 @@ public class UserController {
     }
 
     @GetMapping("/me")
-    public ResponseEntity<DisplayUserDto> getMe(
-            @AuthenticationPrincipal UserDetails userDetails
-    ) {
-        String username = userDetails.getUsername();
-        return ResponseEntity.ok(userApplicationService.getCurrentUser(username));
+    public ResponseEntity<?> getMe(@AuthenticationPrincipal OAuth2User principal) {
+        if (principal == null) {
+            return ResponseEntity.status(401).body("Not authenticated");
+        }
+        return ResponseEntity.ok(
+                Map.of(
+                        "name", principal.getAttribute("name"),
+                        "email", principal.getAttribute("email"),
+                        "picture", principal.getAttribute("picture")
+                )
+        );
     }
 
 }

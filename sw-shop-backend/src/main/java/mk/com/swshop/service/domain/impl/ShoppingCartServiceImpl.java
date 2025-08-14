@@ -3,60 +3,56 @@ package mk.com.swshop.service.domain.impl;
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.domain.ShoppingCart;
 import mk.com.swshop.model.domain.User;
-import mk.com.swshop.model.enums.ShoppingCartStatus;
+import mk.com.swshop.model.enums.Role;
+import mk.com.swshop.repository.ProductRepository;
 import mk.com.swshop.repository.ShoppingCartRepository;
-import mk.com.swshop.service.domain.ProductService;
+import mk.com.swshop.repository.UserRepository;
 import mk.com.swshop.service.domain.ShoppingCartService;
-import mk.com.swshop.service.domain.UserService;
-import org.springframework.expression.ExpressionException;
+
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
 
-    private final ShoppingCartRepository shoppingCartRepository;
-    private final UserService userService;
-    private final ProductService productService;
+    private final ShoppingCartRepository cartRepo;
+    private final UserRepository userRepo;
+    private final ProductRepository productRepo;
 
-    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, UserService userService, ProductService productService) {
-        this.shoppingCartRepository = shoppingCartRepository;
-        this.userService = userService;
-        this.productService = productService;
+    public ShoppingCartServiceImpl(ShoppingCartRepository cartRepo,
+                                   UserRepository userRepo,
+                                   ProductRepository productRepo) {
+        this.cartRepo = cartRepo;
+        this.userRepo = userRepo;
+        this.productRepo = productRepo;
     }
 
     @Override
-    public List<Product> listAllProductsInShoppingCart(Long cartId) {
-        if (shoppingCartRepository.findById(cartId).isEmpty())
-            throw new NullPointerException();
-        return shoppingCartRepository.findById(cartId).get().getProducts();
+    public ShoppingCart addProduct(String email, String username, Long productId) {
+        ShoppingCart cart = getOrCreateCart(email, username);
+
+        Product product = productRepo.findById(productId)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        cart.getProducts().add(product);
+        return cartRepo.save(cart);
     }
 
-    @Override
-    public Optional<ShoppingCart> getActiveShoppingCart(String username) {
-        User user = userService.findByUsername(username);
+    public ShoppingCart getOrCreateCart(String email, String name) {
+        User user = userRepo.findByUsername(name)
+                .orElseGet(() -> {
+                    User newUser = new User();
+                    newUser.setUsername(name);
+                    newUser.setEmail(email);
+                    newUser.setRole(Role.ROLE_USER);
+                    return userRepo.save(newUser);
+                });
 
-        return Optional.of(shoppingCartRepository.findByUserAndStatus(
-                user,
-                ShoppingCartStatus.CREATED
-        ).orElseGet(() -> shoppingCartRepository.save(new ShoppingCart(user))));
-    }
-
-    @Override
-    public Optional<ShoppingCart> addProductToShoppingCart(String username, Long productId) {
-        if (getActiveShoppingCart(username).isPresent()) {
-            ShoppingCart shoppingCart = getActiveShoppingCart(username).get();
-
-            Product product = productService.findById(productId)
-                    .orElseThrow(() -> new ExpressionException("Product not found"));
-            if (!shoppingCart.getProducts().stream().filter(i -> i.getId().equals(productId)).toList().isEmpty())
-                throw new NullPointerException();
-            shoppingCart.getProducts().add(product);
-            return Optional.of(shoppingCartRepository.save(shoppingCart));
-        }
-        return Optional.empty();
+        return cartRepo.findByUser(user).orElseGet(() -> {
+            ShoppingCart cart = new ShoppingCart();
+            cart.setUser(user);
+            return cartRepo.save(cart);
+        });
     }
 
 }

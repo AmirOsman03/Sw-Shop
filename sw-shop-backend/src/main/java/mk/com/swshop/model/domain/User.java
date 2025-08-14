@@ -22,9 +22,15 @@ public class User {
     private Role role;
 
 
-    public User(String username, String password, Role role) {
+    public User(String email, String username) {
         this.username = username;
-        this.password = password;
-        this.role = role;
+        this.email = email;
+        this.role= Role.ROLE_USER;
+    }
+
+    public User(String username, String encode, Role userRole) {
+        this.username = username;
+        this.password = encode;
+        this.role = userRole;
     }
 }

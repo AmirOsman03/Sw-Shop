@@ -1,71 +1,49 @@
 package mk.com.swshop.web.controller;
 
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import mk.com.swshop.dto.display.ShoppingCartDto;
-import mk.com.swshop.model.domain.User;
+import mk.com.swshop.dto.display.DisplayShoppingCartDto;
 import mk.com.swshop.service.application.ShoppingCartApplicationService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/shopping-cart")
-@Tag(name = "Shopping Cart API", description = "Endpoints for managing the shopping cart")
 public class ShoppingCartController {
 
-    private final ShoppingCartApplicationService shoppingCartApplicationService;
+    private final ShoppingCartApplicationService shoppingCartService;
 
-    public ShoppingCartController(ShoppingCartApplicationService shoppingCartApplicationService) {
-        this.shoppingCartApplicationService = shoppingCartApplicationService;
+    public ShoppingCartController(ShoppingCartApplicationService shoppingCartService) {
+        this.shoppingCartService = shoppingCartService;
     }
 
-    @Operation(
-            summary = "Get active shopping cart",
-            description = "Retrieves the active shopping cart for the logged-in user"
-    )
-    @ApiResponses(
-            value = {@ApiResponse(
-                    responseCode = "200",
-                    description = "Shopping cart retrieved successfully"
-            ), @ApiResponse(responseCode = "404", description = "Shopping cart not found")}
-    )
     @GetMapping
-    public ResponseEntity<ShoppingCartDto> getActiveShoppingCart(@AuthenticationPrincipal User user) {
-        String username = user.getUsername();
-        return shoppingCartApplicationService.getActiveShoppingCart(username)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
+    public ResponseEntity<DisplayShoppingCartDto> getCart(
+            @AuthenticationPrincipal OAuth2User principal
+    ) {
+        if (principal == null) return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+
+        String name = principal.getAttribute("name");
+        String email = principal.getAttribute("email");
+
+        return ResponseEntity.ok(shoppingCartService.getOrCreateCart(email, name));
     }
 
-    @Operation(
-            summary = "Add product to shopping cart",
-            description = "Adds a product to the shopping cart for the logged-in user"
-    )
-    @ApiResponses(
-            value = {@ApiResponse(
-                    responseCode = "200", description = "Product added to shopping cart successfully"
-            ), @ApiResponse(
-                    responseCode = "400",
-                    description = "Invalid request"
-            ), @ApiResponse(responseCode = "404", description = "Product not found")}
-    )
-    @PostMapping("/add-product/{id}")
-    public ResponseEntity<ShoppingCartDto> addProductToShoppingCart(
-            @PathVariable Long id,
-            Authentication authentication
+    @PostMapping("/add-product/{productId}")
+    public ResponseEntity<DisplayShoppingCartDto> addProduct(
+            @PathVariable Long productId,
+            @AuthenticationPrincipal OAuth2User principal
     ) {
-        try {
-            User user = (User) authentication.getPrincipal();
-            return shoppingCartApplicationService.addProductToShoppingCart(user.getUsername(), id)
-                    .map(ResponseEntity::ok)
-                    .orElse(ResponseEntity.notFound().build());
-        } catch (RuntimeException exception) {
-            return ResponseEntity.badRequest().build();
+        if (principal == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
+
+        String name = principal.getAttribute("name");
+        String email = principal.getAttribute("email");
+
+        return ResponseEntity.ok(shoppingCartService.addProduct(email, name, productId));
     }
 
 }
+
