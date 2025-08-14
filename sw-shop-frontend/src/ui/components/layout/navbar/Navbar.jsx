@@ -3,7 +3,35 @@ import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
 import { IoSearchOutline } from "react-icons/io5";
 import { FiUser } from "react-icons/fi";
 import { HiOutlineShoppingCart } from "react-icons/hi";
-import { motion, AnimatePresence } from 'framer-motion';  // Fixed spelling
+import { motion, AnimatePresence } from 'framer-motion';
+import {Link} from "react-router";  // Fixed spelling
+
+const pages = [
+    {
+        name: 'Sale',
+        href: "/products"
+    },
+    {
+        name: 'Bras',
+        href: '/products',
+    },
+    {
+        name: 'Panties',
+        href: '/products',
+    },
+    {
+        name: 'Lingerie',
+        href: '/products',
+    },
+    {
+        name: 'Knitwear',
+        href: '/products',
+    },
+    {
+        name: 'Pajamas',
+        href: '/products',
+    },
+]
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,15 +129,19 @@ const Navbar = () => {
 
                             <nav>
                                 <ul className="space-y-4">
-                                    {['Home', 'Shop', 'Collections', 'About Us', 'Contact'].map((item) => (
+                                    {pages.map((page) => (
                                         <motion.li
-                                            key={item}
+                                            key={page.href}
                                             whileHover={{ x: 5 }}
-                                            transition={{ type: 'spring', stiffness: 400 }}
+                                            transition={{ type: "spring", stiffness: 400 }}
                                         >
-                                            <a href="#" className="block py-2 hover:text-gray-500 transition-colors">
-                                                {item}
-                                            </a>
+                                            <Link
+                                                to={page.href}
+                                                onClick={() => setIsMenuOpen(false)}
+                                                className="block py-2 hover:text-gray-500 transition-colors"
+                                            >
+                                                {page.name}
+                                            </Link>
                                         </motion.li>
                                     ))}
                                 </ul>
