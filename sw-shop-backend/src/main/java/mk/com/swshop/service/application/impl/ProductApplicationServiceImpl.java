@@ -2,6 +2,7 @@ package mk.com.swshop.service.application.impl;
 
 import mk.com.swshop.dto.create.CreateProductDto;
 import mk.com.swshop.dto.display.DisplayProductDto;
+import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.service.application.ProductApplicationService;
 import mk.com.swshop.service.domain.ProductService;
 import org.springframework.stereotype.Service;
@@ -42,5 +43,10 @@ public class ProductApplicationServiceImpl implements ProductApplicationService 
     @Override
     public DisplayProductDto findById(Long id) {
         return DisplayProductDto.from(productService.findById(id).orElseThrow());
+    }
+
+    @Override
+    public List<DisplayProductDto> findByCategoryId(Category category) {
+        return DisplayProductDto.from(productService.findByCategory(category));
     }
 }

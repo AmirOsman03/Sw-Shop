@@ -2,6 +2,7 @@ package mk.com.swshop.service.domain.impl;
 
 import lombok.AllArgsConstructor;
 import mk.com.swshop.model.domain.Product;
+import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.repository.ProductRepository;
 import mk.com.swshop.service.domain.ProductService;
 import org.springframework.data.domain.Page;
@@ -51,6 +52,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void deleteById(Long id) {
         productRepository.deleteById(id);
+    }
+
+    @Override
+    public List<Product> findByCategory(Category category) {
+        return productRepository.findByCategory(category);
     }
 
 }
