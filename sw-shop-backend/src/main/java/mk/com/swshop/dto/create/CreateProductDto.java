@@ -4,6 +4,7 @@ import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.model.enums.Color;
 import mk.com.swshop.model.enums.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.model.enums.Color;
 import mk.com.swshop.model.enums.Size;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,8 @@ public class Product {
     @CollectionTable(name = "product_images", joinColumns = @JoinColumn(name = "product_id"))
     @Column(name = "image_url")
     private List<String> images;
+
+
 
 
     public Product(

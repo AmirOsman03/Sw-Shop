@@ -4,11 +4,14 @@ import lombok.AllArgsConstructor;
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.enums.Category;
 import mk.com.swshop.repository.ProductRepository;
+import mk.com.swshop.service.domain.ImageUploadService;
 import mk.com.swshop.service.domain.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +20,8 @@ import java.util.Optional;
 public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
+    private final ImageUploadService imageUploadService; // <-- додај го тука
+
 
     @Override
     public List<Product> findAll() {
@@ -57,6 +62,14 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findByCategory(Category category) {
         return productRepository.findByCategory(category);
+    }
+
+   @Override
+    // ✅ Нов метод за креирање продукт со слики
+    public Product saveWithImages(Product product, List<MultipartFile> images) throws IOException {
+        List<String> imageUrls = imageUploadService.uploadProductImages(images);
+        product.setImages(imageUrls);
+        return productRepository.save(product);
     }
 
 }

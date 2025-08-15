@@ -1,5 +1,6 @@
 package mk.com.swshop.config.init;
 
+import jakarta.annotation.PostConstruct;
 import mk.com.swshop.model.domain.Product;
 import mk.com.swshop.model.domain.User;
 import mk.com.swshop.model.enums.Category;
@@ -29,7 +30,7 @@ public class DataInitializer {
         this.productRepository = productRepository;
     }
 
-    //   @PostConstruct
+     // @PostConstruct
     public void init() {
         initUsers();
         initProducts();
@@ -57,7 +58,7 @@ public class DataInitializer {
                             Color.BEIGE,
                             Category.BRAS,
                             Map.of(Size.S, 10, Size.M, 8, Size.L, 5),
-                            List.of("/")
+                            List.of()
                     ),
                     new Product(
                             "Cotton Panties Set",
@@ -67,7 +68,7 @@ public class DataInitializer {
                             Color.WHITE,
                             Category.PANTIES,
                             Map.of(Size.S, 20, Size.M, 15, Size.L, 12),
-                            List.of("/")
+                            List.of()
                     ),
                     new Product(
                             "Silk Lingerie Nightgown",
@@ -77,7 +78,7 @@ public class DataInitializer {
                             Color.RED,
                             Category.LINGERIE,
                             Map.of(Size.S, 5, Size.M, 3, Size.L, 2),
-                            List.of("/")
+                            List.of()
                     ),
                     new Product(
                             "Thermal Knit Pajamas",
@@ -87,7 +88,7 @@ public class DataInitializer {
                             Color.BLUE,
                             Category.PAJAMAS,
                             Map.of(Size.M, 7, Size.L, 4, Size.XL, 3),
-                            List.of("/")
+                            List.of()
                     ),
                     new Product(
                             "Seamless Sports Bra",
@@ -97,7 +98,7 @@ public class DataInitializer {
                             Color.BLACK,
                             Category.BRAS,
                             Map.of(Size.S, 12, Size.M, 9, Size.L, 6),
-                            List.of("/")
+                            List.of()
                     )
             );
 

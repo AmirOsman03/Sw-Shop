@@ -1,0 +1,11 @@
+cloudinary:
+  cloud-name: dd53ykfpy
+  api-key: 989252781922165
+  api-secret: 1pmZRdQJuzEDUBdEu454YpTePO0
+
+spring:
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 20MB

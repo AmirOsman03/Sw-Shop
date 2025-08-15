@@ -1,4 +1,4 @@
-package mk.com.swshop.config.clound;
+package mk.com.swshop.config.cloud;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
