@@ -10,10 +10,23 @@ const ProductCard = ({product}) => {
 
     if (!product) return null;
 
+    // Default image ако нема слики
+    const imageUrl = product.images && product.images.length > 0
+        ? product.images[0]
+        : ''; // патека до твојата default слика
+
     return (
         <div className="group">
             <div
                 className="aspect-[3/4] bg-gradient-to-br from-pink-50 to-rose-100 rounded-xl overflow-hidden mb-4 relative">
+
+                {/* Слика од продуктот */}
+                <img
+                    src={imageUrl}
+                    alt={product.name}
+                    className="w-full h-full object-cover rounded-xl"
+                />
+
                 <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
                 <div className="absolute top-4 right-4">
                     <button
